@@ -6,11 +6,18 @@ import swc3.demowebshop.DTOs.TutorialDto;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 public interface TutorialControllerInterface {
 
     @GetMapping
     List<TutorialDto> getAll(@RequestParam(required = false) String title);
+
+    @GetMapping("/paginated")
+    Map<String, Object> getAllPaginated(
+            @RequestParam(required = false) String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size);
 
     @GetMapping("/{id}")
     TutorialDto getById(@PathVariable("id") long id);
