@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"new tutorial\",\r\n    \"description\": \"new tutorial description\"\r\n}",
+					"raw": "{\r\n    \"title\": \"new tutorial 2\",\r\n    \"description\": \"new tutorial description 2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,16 +49,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5557/api/tutorials/1",
+					"raw": "http://localhost:5552/api/tutorials/1011",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5557",
+					"port": "5552",
 					"path": [
 						"api",
 						"tutorials",
-						"1"
+						"1011"
 					]
 				}
 			},
@@ -70,12 +70,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5557/api/tutorials/",
+					"raw": "http://localhost:5552/api/tutorials/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5557",
+					"port": "5552",
 					"path": [
 						"api",
 						"tutorials",
@@ -91,16 +91,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5557/api/tutorials/1",
+					"raw": "http://localhost:5552/api/tutorials/1182",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5557",
+					"port": "5552",
 					"path": [
 						"api",
 						"tutorials",
-						"1"
+						"1182"
 					]
 				}
 			},
