@@ -1,4 +1,4 @@
-package swc3.demowebshop.hello;
+package swc3.demowebshop.controllers.hello;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
