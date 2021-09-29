@@ -8,3 +8,4 @@
 - pagination
 - integration tests
 - CI-CD
+- Sorting
