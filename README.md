@@ -57,3 +57,6 @@ heroku / settings / config vars:
 create new key - value pair:
 
 SPRING_PROFILES_ACTIVE = prod
+
+more info here:
+https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/spring-boot-features.html#boot-features-profiles
