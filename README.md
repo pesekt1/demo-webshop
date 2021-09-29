@@ -1,3 +1,8 @@
 # demo web shop server
 
-v
+## branches sequence:
+- helloworld
+- crud
+- swagger
+- exception
+- pagination
