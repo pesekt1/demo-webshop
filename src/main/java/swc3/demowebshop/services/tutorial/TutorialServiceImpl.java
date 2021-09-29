@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import swc3.demowebshop.DTOs.TutorialDto;
 import swc3.demowebshop.entities.Tutorial;
@@ -85,7 +86,48 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
     @Override
     //pagination - overloaded method
     public Map<String, Object> getAll(String title, int page, int size) {
-        Pageable paging = PageRequest.of(page, size);
+        Pageable paging = PageRequest.of(page, size); //paging
+        return getResponseMap(title, paging);
+    }
+
+    //pagination and sorting - overloaded method
+    @Override
+    public Map<String, Object> getAll(String title, int page, int size, String[] sort) {
+        List<Sort.Order> orders = getSortOrders(sort); //object for sorting
+        Pageable paging = PageRequest.of(page, size, Sort.by(orders)); // paging with sorting
+        return getResponseMap(title, paging);
+    }
+
+    //helper method retrieving a list of sort orders
+    private List<Sort.Order> getSortOrders(String[] sort) {
+        List<Sort.Order> orders = new ArrayList<>();
+
+        if (sort[0].contains(",")) {
+            // will sort more than 2 fields
+            // sortOrder="field, direction"
+            for (String sortOrder : sort) {
+                String[] _sort = sortOrder.split(",");
+                orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
+            }
+        } else {
+            // sort=[field, direction]
+            orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
+        }
+        return orders;
+    }
+
+    //helper method retrieving the Sort.Direction enum
+    private Sort.Direction getSortDirection(String direction) {
+        if (direction.equals("asc")) {
+            return Sort.Direction.ASC;
+        } else if (direction.equals("desc")) {
+            return Sort.Direction.DESC;
+        }
+        return Sort.Direction.ASC;
+    }
+
+    //helper method to create the response as a Map
+    private Map<String, Object> getResponseMap(String title, Pageable paging) {
         Page<Tutorial> pageTuts;
 
         if (title == null)

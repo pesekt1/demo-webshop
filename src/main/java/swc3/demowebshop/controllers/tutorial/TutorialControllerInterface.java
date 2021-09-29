@@ -19,6 +19,13 @@ public interface TutorialControllerInterface {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size);
 
+    @GetMapping("/paginated-sorted")
+    Map<String, Object> getAllPaginatedSorted(
+            @RequestParam(required = false) String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "title,asc") String[] sort);
+
     @GetMapping("/{id}")
     TutorialDto getById(@PathVariable("id") long id);
 

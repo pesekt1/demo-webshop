@@ -9,6 +9,7 @@ public interface TutorialServiceInterface {
     Tutorial getById(long id);
     List<Tutorial> getAll(String title);
     Map<String, Object> getAll(String title, int page, int size); //overloaded method for pagination
+    Map<String, Object> getAll(String title, int page, int size, String[] sort); //overloaded method for pagination and sorting
     void create(Tutorial tutorial);
     void update(long id, Tutorial tutorial);
     void delete(long id);

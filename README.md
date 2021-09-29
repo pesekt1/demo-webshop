@@ -8,4 +8,5 @@
 - pagination
 - integration tests
 - CI-CD
+- httpClient  
 - Sorting

@@ -59,6 +59,11 @@ public class TutorialControllerImpl implements TutorialControllerInterface{
 	}
 
 	@Override
+	public Map<String, Object> getAllPaginatedSorted(String title, int page, int size, String[] sort) {
+		return tutorialService.getAll(title, page, size, sort);
+	}
+
+	@Override
 	public TutorialDto getById(long id) {
 		return convertToDto(tutorialService.getById(id));
 	}
