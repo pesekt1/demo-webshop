@@ -56,3 +56,6 @@ NOTE: Heroku might need an extra file where you specify java versioin: system.pr
 ```java
 java.runtime.version=17
 ```
+
+Test if it works:
+When you push to github, the CI action will run, if successful it will deploy to Heroku.
