@@ -3,6 +3,7 @@ package swc3.demowebshop.services.tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import swc3.demowebshop.entities.Tutorial;
+import swc3.demowebshop.exceptionHandling.ResourceNotFoundException;
 import swc3.demowebshop.repositories.TutorialRepository;
 
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.List;
 public class TutorialServiceImpl implements TutorialServiceInterface {
     TutorialRepository tutorialRepository;
 
+    private String errorMessage(long id){
+        return "Not found Tutorial with id = " + id;
+    }
+
     @Autowired
     public TutorialServiceImpl(TutorialRepository tutorialRepository){
         this.tutorialRepository = tutorialRepository;
@@ -19,7 +24,8 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
 
     @Override
     public Tutorial getById(long id) {
-        return tutorialRepository.findById(id).orElseThrow();
+        return tutorialRepository.findById(id) //returns Optional class
+                .orElseThrow(() -> new ResourceNotFoundException(errorMessage(id)));
     }
 
     @Override
@@ -42,12 +48,17 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
 
     @Override
     public void update(long id, Tutorial tutorial) {
-        tutorial.setId(id);
-        tutorialRepository.save(tutorial);
+        var updatedTutorial = tutorialRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(errorMessage(id)));
+
+        updatedTutorial.setTitle(tutorial.getTitle());
+        updatedTutorial.setDescription(tutorial.getDescription());
+        updatedTutorial.setPublished(tutorial.getPublished());
     }
 
     @Override
     public void delete(long id) {
+        if (!tutorialRepository.existsById(id)) throw new ResourceNotFoundException(errorMessage(id));
         tutorialRepository.deleteById(id);
     }
 
