@@ -59,3 +59,10 @@ java.runtime.version=17
 
 Test if it works:
 When you push to github, the CI action will run, if successful it will deploy to Heroku.
+
+If you have errors you can read error logs on heroku, but more detailed logs you can get via Heroku CLI, you need to install it.
+Then you can run in your command line:
+
+```
+heroku logs --app swc3-demo-webshop --tail
+```
