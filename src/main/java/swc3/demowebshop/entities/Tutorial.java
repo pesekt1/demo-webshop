@@ -11,6 +11,15 @@ public class Tutorial {
     private Boolean published;
     private String title;
 
+    //this constructor is for the testing suite because we need to create some objects
+    public Tutorial(String title, String description, boolean published) {
+        this.title = title;
+        this.description = description;
+        this.published = published;
+    }
+
+    public Tutorial(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
