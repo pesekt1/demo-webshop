@@ -65,6 +65,8 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
         updatedTutorial.setTitle(tutorial.getTitle());
         updatedTutorial.setDescription(tutorial.getDescription());
         updatedTutorial.setPublished(tutorial.getPublished());
+
+        tutorialRepository.save(updatedTutorial);
     }
 
     @Override
