@@ -6,3 +6,5 @@
 - swagger
 - exception
 - pagination
+- integration tests
+- CI-CD
