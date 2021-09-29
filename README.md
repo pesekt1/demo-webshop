@@ -11,3 +11,4 @@
 - httpClient  
 - Sorting
 - Profiles
+- custom-queries
