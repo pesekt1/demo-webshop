@@ -2,7 +2,7 @@
 
 ## Sorting
 
-overload getAll() method to accept sorting parameter:
+in the controller interface, overload getAll() method to accept sorting parameter:
 
 ```java
     @GetMapping("/paginated-sorted")
