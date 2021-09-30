@@ -2,24 +2,19 @@ package swc3.demowebshop.controllers.tutorial;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import swc3.demowebshop.DTOs.TutorialDto;
 import swc3.demowebshop.entities.Tutorial;
 import swc3.demowebshop.services.tutorial.TutorialServiceInterface;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 //REST controller uses DTO for data exchange with the web client app
 //Service layer uses entity class, that is why we need to convert between entity and dto class.
-//NOTE: We could also do the conversion in the service layer and thus decouple the controller from the model class.
+//NOTE: We could also do the conversion in the service layer.
 
 @RestController
 @RequestMapping("/api/tutorials")
