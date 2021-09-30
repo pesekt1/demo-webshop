@@ -2,16 +2,17 @@
 
 ## branches sequence:
 - helloworld
-- crud
-- swagger
-- exception
+- CRUD-tutorials
+- swagger-DATA-REST
+- exceptionHandling
 - pagination
-- integration tests
+- integration_tests
 - CI-CD
 - httpClient  
-- Sorting
-- Profiles
+- sorting
+- profiles
 - custom-queries
+- spring_security
 
 ## Spring Security
 
