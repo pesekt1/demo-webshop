@@ -229,3 +229,55 @@ package config:
         DATABASE_URL: ${{secrets.DATABASE_URL}}
         SECRET_KEY: ${{secrets.SECRET_KEY}}
 ```
+
+### http file to test signup and login:
+You can do the same with postman but this is for IntelliJ.
+
+register a user:
+```http request
+### registration of a new user -> users table
+POST http://{{host}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "username": "pesekt100",
+  "email": "pesekt100@gmail.com",
+  "password": "12345678"
+}
+```
+
+login with this user:
+```java
+
+### login with credentials, we get a JWT and save it in client.global - session variable auth_token
+POST http://{{host}}/api/auth/signin
+Content-Type: application/json
+
+{
+  "username": "pesekt",
+  "password": "12345678"
+}
+
+> {% client.global.set("auth_token", response.body.accessToken);
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+client.test("JWT acquired successfully", function() {
+  client.assert(response.body.accessToken != null, "JWT not acquired");
+});
+%}
+```
+
+try tutorials endpoint, but now as a logged-in user, we provide the jwt - json web token:
+
+```java
+### request with JWT authorizaton, we need to login and then use the JWT
+GET http://{{host}}//api/tutorials HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+```
