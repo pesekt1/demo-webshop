@@ -1,8 +1,8 @@
 package swc3.demowebshop.exceptionHandling;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -26,11 +26,12 @@ public class ControllerExceptionHandler {
       return new ResponseEntity<>(createErrorMessage(httpStatus, ex, request), httpStatus);
   }
 
-//    @ExceptionHandler(DataAccessException.class)
-//    public ResponseEntity<ErrorMessage> resourceNotFoundException(DataAccessException ex, WebRequest request) {
-//        var httpStatus = HttpStatus.NOT_FOUND;
-//        return new ResponseEntity<>(createErrorMessage(httpStatus, ex, request), httpStatus);
-//    }
+  //for spring security
+  @ExceptionHandler( AccessDeniedException.class )
+  public ResponseEntity<ErrorMessage> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+      var httpStatus = HttpStatus.FORBIDDEN;
+      return new ResponseEntity<>(createErrorMessage(httpStatus, ex, request), httpStatus);
+  }
 
   //any other exceptions will be handled by this handler and status 500 will be returned
   @ExceptionHandler(Exception.class)
