@@ -1,14 +1,13 @@
 package swc3.demowebshop.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Objects;
 
+//use @EmbeddableId, find out how to connect with OneToMany from Order
 @Setter
 @Getter
 @Entity
@@ -38,17 +37,17 @@ public class OrderItem {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
     private Product productsByProductId;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return orderId == orderItem.orderId && quantity == orderItem.quantity && Objects.equals(unitPrice, orderItem.unitPrice);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(orderId, quantity, unitPrice);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        OrderItem orderItem = (OrderItem) o;
+//        return orderId == orderItem.orderId && quantity == orderItem.quantity && Objects.equals(unitPrice, orderItem.unitPrice);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(orderId, quantity, unitPrice);
+//    }
 
 }

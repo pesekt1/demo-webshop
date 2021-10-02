@@ -81,6 +81,10 @@ To map a data type MySQL TEXT, we need to add:
 @Column(columnDefinition = "TEXT")
 
 If there are enum types in mysql database, change them to primitive types - like string, int...
+- The database was modified:
+    - table invoices: make string instead of enum status
+    - table product_rating: make int instead of enum rating
+    There is a new dump file in sql folder
 
 - use Lombok to remove getters and setters from the code - @Getter, @Setter
 

@@ -1,6 +1,5 @@
 package swc3.demowebshop.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
