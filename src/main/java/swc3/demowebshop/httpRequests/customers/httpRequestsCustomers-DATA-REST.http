@@ -1,0 +1,28 @@
+### DATA-REST APIs based on the CustomersRepository
+GET http://{{host}}/customers HTTP/1.1
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+### APIs coming from DATA-REST using the methods in CustomersRepository
+GET http://{{host}}/customers/search HTTP/1.1
+Content-Type: application/json
+
+### create new customer
+POST http://{{host}}/customers HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Babara",
+  "lastName": "MacGiven",
+  "birthDate": "1986-03-28",
+  "phone": "781-932-9754",
+  "address": "2 Sage Terrace",
+  "city": "Waltham",
+  "state": "WV",
+  "points": 5
+}

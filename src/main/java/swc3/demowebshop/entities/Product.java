@@ -47,7 +47,7 @@ public class Product {
     @OneToMany(mappedBy = "productsByProductId")
     private Collection<OrderItem> orderItemsByProductId;
 
-    @OneToMany(mappedBy = "productsByProductId")
+    @OneToMany(mappedBy = "productId")
     private Collection<ProductRating> productRatingsByProductId;
 
     @Override

@@ -20,6 +20,14 @@ public class Payment {
     private int paymentId;
 
     @Basic
+    @Column(name = "invoice_id", nullable = false)
+    private int invoiceId;
+
+    @Basic
+    @Column(name = "customer_id", nullable = false)
+    private int customerId;
+
+    @Basic
     @Column(name = "date", nullable = false)
     private Date date;
 
@@ -30,16 +38,6 @@ public class Payment {
     @Basic
     @Column(name = "payment_method", nullable = false)
     private byte paymentMethod;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id", nullable = false)
-    private Invoice invoicesByInvoiceId;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private Customer customersByCustomerId;
 
     @Override
     public boolean equals(Object o) {

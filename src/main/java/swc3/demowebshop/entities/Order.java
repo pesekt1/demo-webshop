@@ -20,6 +20,10 @@ public class Order {
     private int orderId;
 
     @Basic
+    @Column(name = "customer_id", nullable = false)
+    private int customerId;
+
+    @Basic
     @Column(name = "order_date", nullable = false)
     private Date orderDate;
 
@@ -39,16 +43,11 @@ public class Order {
     @Column(name = "shipper_id", nullable = true)
     private Short shipperId;
 
-    @OneToMany(mappedBy = "ordersByOrderId")
+    @OneToMany(mappedBy = "orderId")
     private Collection<Invoice> invoicesByOrderId;
 
-    @OneToMany(mappedBy = "ordersByOrderId")
+    @OneToMany(mappedBy = "orderId")
     private Collection<OrderItem> orderItemsByOrderId;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private Customer customersByCustomerId;
 
     @Override
     public boolean equals(Object o) {

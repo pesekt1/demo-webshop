@@ -38,11 +38,6 @@ public class OrderItem {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
     private Product productsByProductId;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false, insertable=false, updatable=false)
-    private Order ordersByOrderId;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

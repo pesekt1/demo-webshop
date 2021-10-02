@@ -1,0 +1,26 @@
+### DATA-REST APIs based on the Repository
+GET http://{{host}}/orders HTTP/1.1
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+### APIs coming from DATA-REST using the methods in Repository
+GET http://{{host}}/orders/search HTTP/1.1
+Content-Type: application/json
+
+### create new order - missing orderItems and orderItems notes
+POST http://{{host}}/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "orderDate": "2020-01-30",
+  "status": 1,
+  "comments": "gold customer",
+  "shippedDate": null,
+  "shipperId": null,
+  "customerId": 1
+}

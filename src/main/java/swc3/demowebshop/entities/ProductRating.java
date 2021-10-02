@@ -30,15 +30,6 @@ public class ProductRating {
     @Column(name = "review", nullable = true, columnDefinition = "TEXT")
     private String review;
 
-    @JsonBackReference
-    @ManyToOne@JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false, insertable=false, updatable=false)
-    private Customer customersByCustomerId;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
-    private Product productsByProductId;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

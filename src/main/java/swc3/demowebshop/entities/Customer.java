@@ -49,13 +49,13 @@ public class Customer {
     @Column(name = "points", nullable = false)
     private int points;
 
-    @OneToMany(mappedBy = "customersByCustomerId")
+    @OneToMany(mappedBy = "customerId")
     private Collection<Order> ordersByCustomerId;
 
-    @OneToMany(mappedBy = "customersByCustomerId")
+    @OneToMany(mappedBy = "customerId")
     private Collection<Payment> paymentsByCustomerId;
 
-    @OneToMany(mappedBy = "customersByCustomerId")
+    @OneToMany(mappedBy = "customerId")
     private Collection<ProductRating> productRatingsByCustomerId;
 
     @Override

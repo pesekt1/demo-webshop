@@ -12,6 +12,16 @@ client.test("Request executed successfully", function() {
 GET http://{{host}}/tutorials/search HTTP/1.1
 Content-Type: application/json
 
-### this does not work...
-GET http://{{host}}/tutorials/search/publishById?id=1013
+###
+GET http://{{host}}/tutorials/search/findAllPublished
 Content-Type: application/json
+
+### create new tutorial
+POST http://{{host}}/tutorials HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "tut20",
+  "description": "tut description",
+  "published": false
+}

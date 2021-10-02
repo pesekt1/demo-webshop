@@ -52,12 +52,7 @@ public class Invoice {
     @Column(name = "status", nullable = false)
     private InvoiceStatus status;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false, insertable=false, updatable=false)
-    private Order ordersByOrderId;
-
-    @OneToMany(mappedBy = "invoicesByInvoiceId")
+    @OneToMany(mappedBy = "invoiceId")
     private Collection<Payment> paymentsByInvoiceId;
 
     @Override
