@@ -1,34 +1,24 @@
 package swc3.demowebshop.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "payment_methods", schema = "swc3_webshop")
 public class PaymentMethod {
-    private byte paymentMethodId;
-    private String name;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_method_id", nullable = false)
-    public byte getPaymentMethodId() {
-        return paymentMethodId;
-    }
-
-    public void setPaymentMethodId(byte paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
-    }
+    private byte paymentMethodId;
 
     @Basic
     @Column(name = "name", nullable = false, length = 50)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Override
     public boolean equals(Object o) {

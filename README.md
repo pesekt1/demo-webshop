@@ -74,5 +74,17 @@ You should see something like this:
 }
 ```
 
+- Now we generate classes for the remaining tables, this is more complex. We need to decide how exactly we want to map them.
+- Composite primary keys will be mapped in as special way - an extra PK class will be generated.
 
+To map a data type MySQL TEXT, we need to add:
+@Column(columnDefinition = "TEXT")
+
+If there are enum types in mysql database, change them to primitive types - like string, int...
+
+- use Lombok to remove getters and setters from the code - @Getter, @Setter
+
+- create repositories for the entity classes
+
+- Check if the APIs are generated from the repositories by DATA-REST: http://localhost:5552/profile
 

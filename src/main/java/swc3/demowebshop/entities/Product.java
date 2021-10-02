@@ -1,90 +1,54 @@
 package swc3.demowebshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "products", schema = "swc3_webshop")
 public class Product {
-    private int productId;
-    private String name;
-    private int quantityInStock;
-    private BigDecimal unitPrice;
-    private String imagePath;
-    private BigDecimal ratingAverage;
-    private Integer ratingsNumber;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id", nullable = false)
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+    private int productId;
 
     @Basic
     @Column(name = "name", nullable = false, length = 50)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Basic
     @Column(name = "quantity_in_stock", nullable = false)
-    public int getQuantityInStock() {
-        return quantityInStock;
-    }
-
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
-    }
+    private int quantityInStock;
 
     @Basic
     @Column(name = "unit_price", nullable = false, precision = 2)
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
+    private BigDecimal unitPrice;
 
     @Basic
     @Column(name = "image_path", nullable = true, length = 255)
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
+    private String imagePath;
 
     @Basic
     @Column(name = "rating_average", nullable = true, precision = 6)
-    public BigDecimal getRatingAverage() {
-        return ratingAverage;
-    }
-
-    public void setRatingAverage(BigDecimal ratingAverage) {
-        this.ratingAverage = ratingAverage;
-    }
+    private BigDecimal ratingAverage;
 
     @Basic
     @Column(name = "ratings_number", nullable = true)
-    public Integer getRatingsNumber() {
-        return ratingsNumber;
-    }
+    private Integer ratingsNumber;
 
-    public void setRatingsNumber(Integer ratingsNumber) {
-        this.ratingsNumber = ratingsNumber;
-    }
+    @JsonBackReference
+    @OneToMany(mappedBy = "productsByProductId")
+    private Collection<OrderItem> orderItemsByProductId;
+
+    @OneToMany(mappedBy = "productsByProductId")
+    private Collection<ProductRating> productRatingsByProductId;
 
     @Override
     public boolean equals(Object o) {
@@ -98,4 +62,5 @@ public class Product {
     public int hashCode() {
         return Objects.hash(productId, name, quantityInStock, unitPrice, imagePath, ratingAverage, ratingsNumber);
     }
+
 }
