@@ -17,3 +17,24 @@
 - custom-queries
 - spring_security
 - JDBC-Communication
+
+## Mapping the database
+
+### Map the tables that do not have any foreign keys
+
+Generate entity classes of these tables from the database into entities package:
+- shippers as Shipper
+- order_statuses as OrderStatus
+- products as Product
+- payment_methods as PaymentMethod
+- customers as Customer
+
+Add this annotation to the IDs:
+```java
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+```
+
+
+
+
+
