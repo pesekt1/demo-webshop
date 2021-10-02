@@ -34,7 +34,45 @@ Add this annotation to the IDs:
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 ```
 
+- Create repositories extending JpaRepository.
 
+- Test if DATA-REST dependency generates all the APIs based on the repositories:
+in the browser run url: http://localhost:5552/profile
+  
+You should see something like this:
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:5552/profile"
+    },
+    "users": {
+      "href": "http://localhost:5552/profile/users"
+    },
+    "orderStatuses": {
+      "href": "http://localhost:5552/profile/orderStatuses"
+    },
+    "roles": {
+      "href": "http://localhost:5552/profile/roles"
+    },
+    "products": {
+      "href": "http://localhost:5552/profile/products"
+    },
+    "shippers": {
+      "href": "http://localhost:5552/profile/shippers"
+    },
+    "tutorials": {
+      "href": "http://localhost:5552/profile/tutorials"
+    },
+    "paymentMethods": {
+      "href": "http://localhost:5552/profile/paymentMethods"
+    },
+    "customers": {
+      "href": "http://localhost:5552/profile/customers"
+    }
+  }
+}
+```
 
 
 
