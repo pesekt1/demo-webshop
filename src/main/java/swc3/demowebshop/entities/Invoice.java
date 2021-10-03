@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -24,24 +24,24 @@ public class Invoice {
     private String number;
 
     @Basic
-    @Column(name = "invoice_total", nullable = false, precision = 2)
-    private BigDecimal invoiceTotal;
+    @Column(name = "invoice_total",columnDefinition = "DECIMAL(9,2)", nullable = false, precision = 2)
+    private double invoiceTotal;
 
     @Basic
-    @Column(name = "payment_total", nullable = false, precision = 2)
-    private BigDecimal paymentTotal;
+    @Column(name = "payment_total", columnDefinition = "DECIMAL(9,2)", nullable = false, precision = 2)
+    private double paymentTotal;
 
     @Basic
     @Column(name = "invoice_date", nullable = false)
-    private Date invoiceDate;
+    private LocalDate invoiceDate;
 
     @Basic
     @Column(name = "due_date", nullable = false)
-    private Date dueDate;
+    private LocalDate dueDate;
 
     @Basic
     @Column(name = "payment_date", nullable = true)
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     @Basic
     @Column(name = "order_id", nullable = false)

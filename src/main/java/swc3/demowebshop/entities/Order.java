@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ public class Order {
 
     @Basic
     @Column(name = "order_date", nullable = false)
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Basic
     @Column(name = "status", nullable = false)
@@ -36,17 +36,17 @@ public class Order {
 
     @Basic
     @Column(name = "shipped_date", nullable = true)
-    private Date shippedDate;
+    private LocalDate shippedDate;
 
     @Basic
     @Column(name = "shipper_id", nullable = true)
     private Short shipperId;
 
     @OneToMany(mappedBy = "orderId")
-    private Collection<Invoice> invoicesByOrderId;
+    private Collection<Invoice> invoices;
 
     @OneToMany(mappedBy = "orderId")
-    private Collection<OrderItem> orderItemsByOrderId;
+    private Collection<OrderItem> orderItems;
 
     @Override
     public boolean equals(Object o) {
@@ -61,4 +61,13 @@ public class Order {
         return Objects.hash(orderId, orderDate, status, comments, shippedDate, shipperId);
     }
 
+    //Hibernate will ignore this field
+    @Transient
+    public Double getTotalOrderPrice() {
+        double sum = 0;
+        for (OrderItem oi : getOrderItems()) {
+            sum += oi.getTotalPrice();
+        }
+        return sum;
+    }
 }

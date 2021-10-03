@@ -21,10 +21,18 @@ public class OrderItemNote {
     @Column(name = "note", nullable = false, length = 255)
     private String note;
 
+    @Basic
+    @Column(name = "order_id", nullable = false)
+    private int orderId;
+
+    @Basic
+    @Column(name = "product_id", nullable = false)
+    private int productId;
+
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
     private OrderItem orderItems;
 
     @Override

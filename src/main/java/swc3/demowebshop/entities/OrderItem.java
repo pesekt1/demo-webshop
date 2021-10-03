@@ -1,16 +1,17 @@
 package swc3.demowebshop.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Collection;
 
 //use @EmbeddableId, find out how to connect with OneToMany from Order
 @Setter
 @Getter
 @Entity
+@EqualsAndHashCode
 @Table(name = "order_items", schema = "swc3_webshop")
 @IdClass(OrderItemPK.class)
 public class OrderItem {
@@ -27,8 +28,8 @@ public class OrderItem {
     private int quantity;
 
     @Basic
-    @Column(name = "unit_price", nullable = false, precision = 2)
-    private BigDecimal unitPrice;
+    @Column(name = "unit_price", columnDefinition = "DECIMAL(9,2)", nullable = false, precision = 2)
+    private double unitPrice;
 
     @OneToMany(mappedBy = "orderItems")
     private Collection<OrderItemNote> orderItemNotes;
@@ -37,17 +38,8 @@ public class OrderItem {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
     private Product productsByProductId;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        OrderItem orderItem = (OrderItem) o;
-//        return orderId == orderItem.orderId && quantity == orderItem.quantity && Objects.equals(unitPrice, orderItem.unitPrice);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(orderId, quantity, unitPrice);
-//    }
-
+    @Transient
+    public double getTotalPrice() {
+        return getUnitPrice() * getQuantity();
+    }
 }
