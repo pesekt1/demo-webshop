@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "c111d03f-1e8e-4770-b336-26d0bc7c79ad",
+		"name": "swc3-demo-webshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST tutorial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"new tutorial 2\",\r\n    \"description\": \"new tutorial description 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/api/tutorials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"tutorials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT tutorial",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"edited tutorial\",\r\n    \"description\": \"edited description\",\r\n    \"published\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/api/tutorials/1011",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"tutorials",
+						"1011"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET tutorials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5552/api/tutorials/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"tutorials",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete tutorial with id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5552/api/tutorials/1182",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"tutorials",
+						"1182"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET root api - DATA-REST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5552/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET tutorial by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5552/api/tutorials/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"tutorials",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST tutorial DATA-REST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "            {\r\n                \"description\": \"tutorial test\",\r\n                \"published\": false,\r\n                \"title\": \"Test tutorial\"\r\n            }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/tutorials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"tutorials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST customers DATA-REST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "            {\r\n                \"firstName\": \"Babara\",\r\n                \"lastName\": \"MacGiven\",\r\n                \"birthDate\": \"1986-03-28\",\r\n                \"phone\": \"781-932-9754\",\r\n                \"address\": \"2 Sage Terrace\",\r\n                \"city\": \"Waltham\",\r\n                \"state\": \"WV\",\r\n                \"points\": 5\r\n            }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST orders DATA-REST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"orderDate\": \"2020-01-30\",\r\n  \"status\": 1,\r\n  \"comments\": \"gold customer\",\r\n  \"shippedDate\": null,\r\n  \"shipperId\": null,\r\n  \"customerId\": 1,\r\n  \"orderItemsByOrderId\": [\r\n      {\r\n        \"quantity\": 4,\r\n        \"unitPrice\": 3.74,\r\n        \"productsByProductId\":{\r\n            \"name\": \"Foam Dinner Plate\",\r\n            \"quantityInStock\": 75,\r\n            \"unitPrice\": 1.21,\r\n            \"imagePath\": null,\r\n            \"ratingAverage\": 3.000000,\r\n            \"ratingsNumber\": 1\r\n        }\r\n  }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"customerId\": 1,\r\n        \"comments\": \"gold customer\",\r\n        \"orderItems\":[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 2,\r\n                \"unitPrice\": 2,\r\n                \"orderItemNotes\": \r\n                [\r\n                    {\"note\": \"note 1\"},\r\n                    {\"note\": \"note 2\"}\r\n                ]\r\n            },\r\n                        {\r\n                \"productId\": 2,\r\n                \"quantity\": 5,\r\n                \"unitPrice\": 3,\r\n                \"orderItemNotes\": \r\n                [\r\n                    {\"note\": \"note 1\"},\r\n                    {\"note\": \"note 2\"}\r\n                ]\r\n            }\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n  \"invoiceId\": 32,\r\n  \"customerId\": 1,\r\n  \"amount\": 5,\r\n  \"paymentMethod\": \"1\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5552/api/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5552",
+					"path": [
+						"api",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
