@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Setter
@@ -28,11 +29,11 @@ public class Payment {
 
     @Basic
     @Column(name = "date", nullable = false)
-    private Date date;
+    private LocalDate date;
 
     @Basic
-    @Column(name = "amount", nullable = false, precision = 2)
-    private BigDecimal amount;
+    @Column(name = "amount", columnDefinition = "DECIMAL(9,2)", nullable = false, precision = 2)
+    private double amount;
 
     @Basic
     @Column(name = "payment_method", nullable = false)
