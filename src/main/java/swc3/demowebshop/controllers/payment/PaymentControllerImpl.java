@@ -10,7 +10,6 @@ import swc3.demowebshop.services.payment.PaymentServiceInterface;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -40,7 +39,7 @@ public class PaymentControllerImpl implements PaymentControllerInterface {
         return paymentService.getAll()
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class PaymentControllerImpl implements PaymentControllerInterface {
         return paymentService.getByCustomerId(id)
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

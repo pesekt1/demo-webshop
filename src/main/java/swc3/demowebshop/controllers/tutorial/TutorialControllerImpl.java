@@ -10,7 +10,6 @@ import swc3.demowebshop.services.tutorial.TutorialServiceInterface;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 //REST controller uses DTO for data exchange with the web client app
 //Service layer uses entity class, that is why we need to convert between entity and dto class.
@@ -28,11 +27,13 @@ public class TutorialControllerImpl implements TutorialControllerInterface{
 		this.modelMapper = modelMapper;
 	}
 
+	//TODO extract a generic utility method
 	//helper method to convert entity -> DTO
 	private TutorialDto convertToDto(Tutorial tutorial) {
 		return modelMapper.map(tutorial, TutorialDto.class);
 	}
 
+	//TODO extract a generic utility method
 	//helper method to convert DTO -> entity
 	private Tutorial convertToEntity(TutorialDto tutorialDto) {
 		return modelMapper.map(tutorialDto, Tutorial.class);
@@ -44,7 +45,7 @@ public class TutorialControllerImpl implements TutorialControllerInterface{
 		return tutorialService.getAll(title)
 				.stream()
 				.map(this::convertToDto)
-				.collect(Collectors.toList());
+				.toList();
 	}
 
 	//retrieve paginated tutorials
@@ -88,7 +89,7 @@ public class TutorialControllerImpl implements TutorialControllerInterface{
 		return tutorialService.findByPublished(published)
 				.stream()
 				.map(this::convertToDto)
-				.collect(Collectors.toList());
+				.toList();
 	}
 
 }

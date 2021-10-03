@@ -33,9 +33,10 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	public static UserDetailsImpl build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
+		List<GrantedAuthority> authorities = user.getRoles()
+				.stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()); // cannot use .toList() because it is a different type
 
 		return new UserDetailsImpl(
 				user.getId(), 
@@ -96,5 +97,10 @@ public class UserDetailsImpl implements UserDetails {
 			return false;
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getUsername(), getEmail(), getPassword(), getAuthorities());
 	}
 }

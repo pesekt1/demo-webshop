@@ -10,7 +10,6 @@ import swc3.demowebshop.entities.InvoiceStatus;
 import swc3.demowebshop.services.invoice.InvoiceServiceInterface;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/invoices")
@@ -35,7 +34,7 @@ public class InvoicesControllerImpl implements InvoiceControllerInterface {
         return invoiceService.getAll()
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class InvoicesControllerImpl implements InvoiceControllerInterface {
         return invoiceService.getByOrderId(id)
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -61,7 +60,7 @@ public class InvoicesControllerImpl implements InvoiceControllerInterface {
         return invoiceService.getByStatus(status)
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

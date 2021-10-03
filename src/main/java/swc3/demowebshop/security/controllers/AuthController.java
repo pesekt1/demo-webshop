@@ -28,7 +28,6 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -62,9 +61,10 @@ public class AuthController {
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-		List<String> roles = userDetails.getAuthorities().stream()
+		List<String> roles = userDetails.getAuthorities()
+				.stream()
 				.map(GrantedAuthority::getAuthority) //.map(item -> item.getAuthority())
-				.collect(Collectors.toList());
+				.toList();
 
 		return ResponseEntity.ok(new JwtResponse(jwt,
 												 userDetails.getId(), 
@@ -120,10 +120,11 @@ public class AuthController {
 					roles.add(customerRole);
 
 					break;
-//				default:
-//					Role customerRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
-//							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//					roles.add(customerRole);
+				//TODO make customer the default scenario
+				default:
+					customerRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+							.orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_MESSAGE));
+					roles.add(customerRole);
 				}
 			});
 		}

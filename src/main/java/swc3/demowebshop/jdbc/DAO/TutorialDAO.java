@@ -43,7 +43,7 @@ public class TutorialDAO implements DaoInterface<TutorialPOJO, Long> {
         String sql = "SELECT * from tutorials where id = ?";
         TutorialPOJO tutorial = null;
         try {
-            tutorial = jdbcTemplate.queryForObject(sql, new Object[]{id}, new TutorialRowMapper());
+            tutorial = jdbcTemplate.queryForObject(sql, new TutorialRowMapper(), id);
         }catch (DataAccessException ex) {
             log.info(String.format("Tutorial not found: %s", "id"));
         }
@@ -67,7 +67,6 @@ public class TutorialDAO implements DaoInterface<TutorialPOJO, Long> {
             log.info( "Tutorial Deleted: {}", id);
         }
     }
-
 
     @Override
     public List<TutorialPOJO> findAllVulnerable(String filter) {

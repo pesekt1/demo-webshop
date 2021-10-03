@@ -9,7 +9,6 @@ import swc3.demowebshop.entities.Order;
 import swc3.demowebshop.services.order.OrderServiceInterface;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -38,7 +37,7 @@ public class OrderControllerImpl implements OrderControllerInterface{
         return orderService.getAll()
                 .stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

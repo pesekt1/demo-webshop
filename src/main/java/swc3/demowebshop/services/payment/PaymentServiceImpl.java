@@ -60,6 +60,7 @@ public class PaymentServiceImpl implements PaymentServiceInterface {
         paymentRepository.deleteById(id);
     }
 
+    //TODO Do I need this method?
     private int findCustomerId(int invoiceId){
         var invoice = invoiceRepository.findById(invoiceId).orElseThrow(() -> new ResourceNotFoundException("invoice not found"));
         var order = orderRepository.findById(invoice.getOrderId()).orElseThrow(() -> new ResourceNotFoundException("order not found"));

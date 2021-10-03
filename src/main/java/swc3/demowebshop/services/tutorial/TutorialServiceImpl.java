@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class TutorialServiceImpl implements TutorialServiceInterface {
@@ -108,8 +107,8 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
             // will sort more than 2 fields
             // sortOrder="field, direction"
             for (String sortOrder : sort) {
-                String[] _sort = sortOrder.split(",");
-                orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
+                String[] sortTemp = sortOrder.split(",");
+                orders.add(new Sort.Order(getSortDirection(sortTemp[1]), sortTemp[0]));
             }
         } else {
             // sort=[field, direction]
@@ -142,7 +141,7 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
         List<TutorialDto> tutorialsDto = tutorials
                 .stream()
                 .map(tutorial -> modelMapper.map(tutorial, TutorialDto.class))
-                .collect(Collectors.toList());
+                .toList();
 
         Map<String, Object> response = new HashMap<>();
         response.put("tutorials", tutorialsDto);
