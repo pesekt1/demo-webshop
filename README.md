@@ -174,6 +174,40 @@ end;
 
 
 ### http requests for testing the api:
+```http request
+###
+GET http://{{host}}/api/payments HTTP/1.1
+Content-Type: application/json
 
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+GET http://{{host}}/api/payments/3 HTTP/1.1
+Content-Type: application/json
+
+### create new tutorial
+POST http://{{host}}/api/payments HTTP/1.1
+Content-Type: application/json
+
+{
+  "invoiceId": 32,
+  "customerId": 1,
+  "amount": 5,
+  "paymentMethod": "1"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not 201");
+});
+%}
+
+...
+...
+```
 
 Test locally and deploy to Heroku.
