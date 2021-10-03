@@ -12,7 +12,7 @@ client.test("Request executed successfully", function() {
 GET http://{{host}}/orders/search HTTP/1.1
 Content-Type: application/json
 
-### create new order - missing orderItems and orderItems notes
+### create new order - does not work, missing orderItems and orderItems notes
 POST http://{{host}}/orders HTTP/1.1
 Content-Type: application/json
 

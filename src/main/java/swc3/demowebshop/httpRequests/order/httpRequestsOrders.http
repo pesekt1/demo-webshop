@@ -1,0 +1,51 @@
+###
+GET http://{{host}}/api/orders HTTP/1.1
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+GET http://{{host}}/api/orders/3 HTTP/1.1
+Content-Type: application/json
+
+### create new tutorial
+POST http://{{host}}/api/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "comments": "gold customer",
+  "orderItems":[
+    {
+      "productId": 1,
+      "quantity": 2,
+      "unitPrice": 2,
+      "orderItemNotes":
+      [
+        {"note": "note 1"},
+        {"note": "note 2"}
+      ]
+    },
+    {
+      "productId": 2,
+      "quantity": 5,
+      "unitPrice": 3,
+      "orderItemNotes":
+      [
+        {"note": "note 1"},
+        {"note": "note 2"}
+      ]
+    }
+  ]
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not 201");
+});
+%}
+
