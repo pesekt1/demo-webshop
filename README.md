@@ -1,24 +1,5 @@
 # demo web shop server
 
-- This is a Spring Boot Server demo project.
-- Each branch is implementing some new feature.
-
-## branches sequence:
-- helloworld
-- CRUD-tutorials
-- swagger-DATA-REST
-- exceptionHandling
-- pagination
-- integration_tests
-- CI-CD
-- httpClient  
-- sorting
-- profiles
-- custom-queries
-- spring_security
-- JDBC-Communication
-- MappingTheWholeDatabase
-
 ## Invoice - service and controller layer
 
 - Change all the Date types in Invoice class to LocalDate.
