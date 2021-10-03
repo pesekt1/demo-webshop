@@ -8,7 +8,7 @@ import swc3.demowebshop.exceptionHandling.ResourceNotFoundException;
 import swc3.demowebshop.repositories.OrderItemNoteRepository;
 import swc3.demowebshop.repositories.OrderItemRepository;
 import swc3.demowebshop.repositories.OrderRepository;
-import swc3.demowebshop.services.invoice.InvoiceService;
+import swc3.demowebshop.services.invoice.InvoiceServiceInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
     OrderRepository orderRepository;
     OrderItemRepository orderItemRepository;
     OrderItemNoteRepository orderItemNoteRepository;
-    InvoiceService invoiceService;
+    InvoiceServiceInterface invoiceService;
 
     private String errorMessage(long id){
         return "Not found order with id = " + id;
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
             OrderRepository ordersRepository,
             OrderItemRepository orderItemRepository,
             OrderItemNoteRepository orderItemNoteRepository,
-            InvoiceService invoiceService
+            InvoiceServiceInterface invoiceService
     ) {
         this.orderRepository = ordersRepository;
         this.orderItemRepository = orderItemRepository;

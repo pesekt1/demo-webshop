@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import swc3.demowebshop.DTOs.InvoiceDto;
 import swc3.demowebshop.entities.Invoice;
 import swc3.demowebshop.entities.InvoiceStatus;
-import swc3.demowebshop.services.invoice.InvoiceService;
+import swc3.demowebshop.services.invoice.InvoiceServiceInterface;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/invoices")
 public class InvoicesControllerImpl implements InvoiceControllerInterface {
 
-    private final InvoiceService invoiceService; //interface
+    private final InvoiceServiceInterface invoiceService; //interface
     ModelMapper modelMapper; // for entity <--> DTO conversion
 
     @Autowired
-    public InvoicesControllerImpl(InvoiceService invoiceService) {
+    public InvoicesControllerImpl(InvoiceServiceInterface invoiceService, ModelMapper modelMapper) {
         this.invoiceService = invoiceService;
-        this.modelMapper = new ModelMapper();
+        this.modelMapper = modelMapper;
     }
 
     //helper method to convert entity -> DTO

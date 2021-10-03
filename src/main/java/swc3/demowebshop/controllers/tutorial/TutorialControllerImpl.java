@@ -23,9 +23,9 @@ public class TutorialControllerImpl implements TutorialControllerInterface{
 	ModelMapper modelMapper; // for entity <--> DTO conversion
 
 	@Autowired //dependency injection via constructor
-	public TutorialControllerImpl(TutorialServiceInterface tutorialService){
+	public TutorialControllerImpl(TutorialServiceInterface tutorialService, ModelMapper modelMapper){
 		this.tutorialService = tutorialService;
-		this.modelMapper = new ModelMapper();
+		this.modelMapper = modelMapper;
 	}
 
 	//helper method to convert entity -> DTO

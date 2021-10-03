@@ -28,9 +28,9 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
     }
 
     @Autowired
-    public TutorialServiceImpl(TutorialRepository tutorialRepository){
+    public TutorialServiceImpl(TutorialRepository tutorialRepository, ModelMapper modelMapper){
         this.tutorialRepository = tutorialRepository;
-        this.modelMapper = new ModelMapper();
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -139,7 +139,8 @@ public class TutorialServiceImpl implements TutorialServiceInterface {
 
         List<Tutorial> tutorials = pageTuts.getContent();
         //convert to DTO
-        List<TutorialDto> tutorialsDto = tutorials.stream()
+        List<TutorialDto> tutorialsDto = tutorials
+                .stream()
                 .map(tutorial -> modelMapper.map(tutorial, TutorialDto.class))
                 .collect(Collectors.toList());
 

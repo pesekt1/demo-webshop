@@ -5,7 +5,7 @@ import swc3.demowebshop.entities.InvoiceStatus;
 
 import java.util.List;
 
-public interface InvoiceService {
+public interface InvoiceServiceInterface {
     List<Invoice> getAll();
     Invoice getById(int id);
     List<Invoice> getByOrderId(int id);
