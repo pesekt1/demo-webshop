@@ -18,9 +18,9 @@ public class OrderControllerImpl implements OrderControllerInterface{
     ModelMapper modelMapper; // for entity <--> DTO conversion
 
     @Autowired
-    public OrderControllerImpl(OrderServiceInterface orderService) {
+    public OrderControllerImpl(OrderServiceInterface orderService, ModelMapper modelMapper) {
         this.orderService = orderService;
-        this.modelMapper = new ModelMapper();
+        this.modelMapper = modelMapper;
     }
 
     //helper method to convert entity -> DTO

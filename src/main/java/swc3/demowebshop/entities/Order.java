@@ -1,6 +1,7 @@
 package swc3.demowebshop.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,11 +9,19 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
 
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
 @Table(name = "orders", schema = "swc3_webshop")
 public class Order {
+
+    public Order(String comments, Collection<OrderItem> orderItems, int customerId){
+        this.comments = comments;
+        this.orderItems = orderItems;
+        this.customerId = customerId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)

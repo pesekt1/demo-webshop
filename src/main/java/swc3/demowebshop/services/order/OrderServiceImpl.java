@@ -55,18 +55,19 @@ public class OrderServiceImpl implements OrderServiceInterface {
 
     @Override
     public void create(Order order) {
-        order.setOrderId(0); //because it is generating id=1
         order.setOrderDate(LocalDate.now()); //set the date
         order.setStatus(NEW_ORDER_STATUS); //set the default status
 
         var savedOrder = orderRepository.save(order);
 
+        //saving order items
         var orderItems = savedOrder.getOrderItems();
         for (OrderItem orderItem:orderItems) {
             orderItem.setOrderId(savedOrder.getOrderId());
             var orderItemNotes = orderItem.getOrderItemNotes();
             var savedOrderItem = orderItemRepository.save(orderItem);
 
+            //saving order item notes
             for (OrderItemNote orderItemNote:orderItemNotes) {
                 orderItemNote.setOrderId(savedOrderItem.getOrderId());
                 orderItemNote.setProductId(savedOrderItem.getProductId());

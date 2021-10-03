@@ -3,7 +3,6 @@ package swc3.demowebshop.DTOs;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import swc3.demowebshop.entities.OrderItem;
 
 import java.util.Collection;
 
@@ -12,6 +11,6 @@ import java.util.Collection;
 @Getter
 public class OrderDto {
     private String comments;
-    private Collection<OrderItem> orderItems;
+    private Collection<OrderItemDto> orderItems;
     private int customerId;
 }
