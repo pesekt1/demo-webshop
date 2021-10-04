@@ -272,6 +272,8 @@ client.test("Request executed successfully", function() {
 ### set roles for endpoints:
 
 Use @PreAuthorize - you can use it for the whole controller class or for each method:
+https://www.baeldung.com/spring-security-method-security
+
 ```java
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 
