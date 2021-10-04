@@ -14,7 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .addMapping("/**")
                 .allowedOrigins(
                         "http://localhost:8081",
-                        "http://localhost:8080",
                         "https://swc3-react-frontend.herokuapp.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                 .allowCredentials(true)
