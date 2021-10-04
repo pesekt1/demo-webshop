@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @EqualsAndHashCode
 public class TutorialDto {
+    private long id;
     private String description;
     private Boolean published;
     private String title;
