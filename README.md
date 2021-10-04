@@ -1,22 +1,27 @@
 # demo web shop server
 
-- This is a Spring Boot Server demo project.
-- Each branch is implementing some new feature.
+## CORS
 
-## branches sequence:
-- helloworld
-- CRUD-tutorials
-- swagger-DATA-REST
-- exceptionHandling
-- pagination
-- integration_tests
-- CI-CD
-- httpClient  
-- sorting
-- profiles
-- custom-queries
-- spring_security
-- JDBC-Communication
-- MappingTheWholeDatabase
-- Invoices_Orders
-- payments
+To allow web clients to communicate with our web server via http protocol, we need to implement WebMvcConfigurer:
+
+We need to override method addCorsMappings.
+
+allowedOrigins will be the urls from where http requests are accepted.
+
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+                .addMapping("/**")
+                .allowedOrigins(
+                        "http://localhost:8081",
+                        "https://swc3-react-frontend.herokuapp.com")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
+                .allowCredentials(true)
+                .maxAge(3600); //1 hour
+    }
+```
