@@ -268,3 +268,14 @@ client.test("Request executed successfully", function() {
 });
 %}
 ```
+
+### set roles for endpoints:
+
+Use @PreAuthorize - you can use it for the whole controller class or for each method:
+```java
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+
+@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
+```
+
+Now create accounts for customer, employee and admin and test that it works.
