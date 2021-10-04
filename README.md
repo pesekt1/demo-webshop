@@ -36,4 +36,4 @@ springdoc.swagger-ui.operationsSorter=method
 springdoc.api-docs.path=/api-docs
 ```
 
-now run http://localhost:5552/swaggger and it should work
+now run http://localhost:5552/swagger and it should work
