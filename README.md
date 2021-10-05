@@ -148,6 +148,62 @@ we need to implement 2 interfaces coming from spring security:
 - UserDetails
 - UserDetailsService
 
+
+UserDetailsImpl:
+```java
+public class UserDetailsImpl implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
+	private final Long id;
+	private final String username;
+	private final String email;
+
+	@JsonIgnore
+	private final String password;
+
+	private final Collection<? extends GrantedAuthority> authorities;
+
+	public UserDetailsImpl(Long id, String username, String email, String password,
+			Collection<? extends GrantedAuthority> authorities) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.authorities = authorities;
+	}
+
+	public static UserDetailsImpl build(User user) {
+		List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
+				.collect(Collectors.toList());
+
+		return new UserDetailsImpl(
+				user.getId(), 
+				user.getUsername(), 
+				user.getEmail(),
+				user.getPassword(), 
+				authorities);
+	}
+```
+
+UserDetailsServiceImpl:
+```java
+@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
+	@Autowired
+	UserRepository userRepository;
+
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+		return UserDetailsImpl.build(user);
+	}
+}
+```
+
 check out my code...
 
 ### maven dependency for JWT - json web token
@@ -174,9 +230,134 @@ app.jwtExpirationMs= 86400000
 set up SECRET_KEY in your environment variables - some string
 
 ### extra classes needed
-Now we need many different classes - they are in packages:
-- jwt
+Now we need a few classes - they are in packages:
+- jwt:
+  
+JwtUtils:
+```java
+@Component
+public class JwtUtils {
+	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+
+	@Value("${app.secretkey}")
+	private String jwtSecret;
+
+	@Value("${app.jwtExpirationMs}")
+	private int jwtExpirationMs;
+
+	public String generateJwtToken(Authentication authentication) {
+
+		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+
+		//here we can build the JWT structure
+		return Jwts.builder()
+				//.setSubject((userPrincipal.getUsername() + ' ' +  userPrincipal.getEmail()))
+				.setSubject((userPrincipal.getUsername()))
+				.setId(userPrincipal.getId().toString())
+				.setIssuedAt(new Date())
+				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+				.signWith(SignatureAlgorithm.HS512, jwtSecret)
+				.compact();
+	}
+
+	public String getUserNameFromJwtToken(String token) {
+		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+	}
+
+	public boolean validateJwtToken(String authToken) {
+		try {
+			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+			return true;
+		} catch (SignatureException e) {
+			logger.error("Invalid JWT signature: {}", e.getMessage());
+		} catch (MalformedJwtException e) {
+			logger.error("Invalid JWT token: {}", e.getMessage());
+		} catch (ExpiredJwtException e) {
+			logger.error("JWT token is expired: {}", e.getMessage());
+		} catch (UnsupportedJwtException e) {
+			logger.error("JWT token is unsupported: {}", e.getMessage());
+		} catch (IllegalArgumentException e) {
+			logger.error("JWT claims string is empty: {}", e.getMessage());
+		}
+
+		return false;
+	}
+}
+```
+
+AuthTokenFilter
+
+```java
+public class AuthTokenFilter extends OncePerRequestFilter {
+	@Autowired
+	private JwtUtils jwtUtils;
+
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
+
+	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		try {
+			String jwt = parseJwt(request);
+			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+				String username = jwtUtils.getUserNameFromJwtToken(jwt);
+
+				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+						userDetails, null, userDetails.getAuthorities());
+				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+		} catch (Exception e) {
+			logger.error("Cannot set user authentication: {_}",e);
+		}
+
+		filterChain.doFilter(request, response);
+	}
+
+	private String parseJwt(HttpServletRequest request) {
+		String headerAuth = request.getHeader("Authorization");
+
+		if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+			return headerAuth.substring(7);
+		}
+
+		return null;
+	}
+}
+```
+
+AuthEntryPoint
+```java
+@Component
+public class AuthEntryPointJwt implements AuthenticationEntryPoint {
+
+	private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
+
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+		logger.error("Unauthorized error: {}", authException.getMessage());
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+	}
+
+}
+```
+
 - payload
+  - request
+      - LoginRequest
+      - SignupRequest
+  - response
+      - JwtResponse
+      - MessageResponse
+  
+... look in the source code.
+        
 
 ### Config
 We need some configuration classes:
