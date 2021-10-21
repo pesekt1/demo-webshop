@@ -21,3 +21,7 @@
 - Invoices_Orders
 - payments
 - CORS
+
+## MySQL database:
+
+![database EER](src/main/resources/static/db_EER_diagram.png)
