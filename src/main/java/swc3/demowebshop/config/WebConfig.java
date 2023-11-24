@@ -14,7 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addMapping("/**")
                 .allowedOrigins(
                         "http://localhost:8081",
-                        "https://swc3-react-frontend.herokuapp.com")
+                        "https://swc3-react-frontend.herokuapp.com",
+                        "https://lemon-grass-0ae652703.4.azurestaticapps.net")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                 .allowCredentials(true)
                 .maxAge(3600); //1 hour
